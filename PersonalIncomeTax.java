@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 public class PersonalIncomeTax{
     public static void taxCount(int result){
@@ -99,17 +98,8 @@ public class PersonalIncomeTax{
             }
             i++;
         }
-        for(int k = 0;k<i;k++){
-          System.out.print(taxs[k]+" ");
-        }
-        for(int j = 0;j<i-1;j++){
-          System.out.print(nums[j]+" ");
-        }
-        System.out.printf("%d - %d = %d - %d = %d * %d% = %.0f",result , nums[i-2] , result-nums[i-2],nums[i-2],result=nums[i-2]-nums[i-2],taxs[i-1],(result=nums[i-2]-nums[i-1])*taxs[i-1]/100f);
-        for(int l = 1;l<i;l++){
-          
-        }
-        System.out.println(sunTax);
+
+        System.out.println("Tax :" + sunTax + " BAHT.");
     }
     
     public static void main(String[] args) {
@@ -134,12 +124,14 @@ public class PersonalIncomeTax{
             System.out.println("Input other income : ");
             int incomeCost = sc_incost.nextInt();
             result = salayYear-costYear-taxDeuction+incomeCost;
-            System.out.println("Income : (" + salay + "x12) - " + costYear + " - " + taxDeuction + " - "  +incomeCost + " = " + result  );      
+            // System.out.println("Income : (" + salay + "x12) - " + costYear + " - " + taxDeuction + " - "  +incomeCost + " = " + (int)result  );  
+            System.out.printf("Income : (%d x 12) - %d - %d - %d = %d\n",salay,costYear,taxDeuction,incomeCost,result);    
             taxCount(result);
         }
         else if(income == 'N'){
             result = (salayYear-costYear)-taxDeuction;
-            System.out.println("Income : (" + salay + "x12) - " + costYear + " - " + taxDeuction + " = " + result  );
+            // System.out.println("Income : (" + salay + "x12) - " + costYear + " - " + taxDeuction + " = " + result  );
+            System.out.printf("Income : (%d x 12) - %d - %d = %d\n",salay,costYear,taxDeuction,result);    
             taxCount(result);
         }
     }
