@@ -2,73 +2,116 @@
 import java.util.Scanner;
 public class PersonalIncomeTax{
     public static void taxCount(int result){
-        int sa,tax,xi;
-        float a;
-        if(result <= 150000){
-            xi = 0;
-            a = result;
-            sa = 0;
-            tax = 0;
-        }
-        else if(result >150000 && result <= 300000){
-            xi = 150000;
-            a = (result-xi)*(5f/100f);
-            sa = 0;
-            tax = 5;
-        }
-        else if(result >300000 && result <= 500000){
-            tax = 10;
-            xi = 300000;
-            a = (result-xi)*(10f/100f);
-            sa = 7500;
-        }
-        else if(result >500000 && result <= 750000){
-            tax = 15;
-            xi = 500000;
-            a = (result-xi)*(15f/100f);
-            sa = 27500;
-        }
-        else if(result >750000 && result <= 1000000){
-            tax = 20;
-            xi = 750000;
-            a = (result-xi)*(20f/100f);
-            sa = 65000;
-        }
-        else if(result >1000000 && result <= 2000000){
-            tax = 25;
-            xi = 1000000;
-            a = (result-xi)*(25f/100f);
-            sa = 115000;
-        }
-        else if(result >2000000 && result <= 5000000){
-            tax = 30;
-            xi = 2000000;
-            a = (result-xi)*(30f/100f);
-            sa = 365000;
-        }
-        else{
-            tax = 35;
-            sa = 1265000;
-            xi = 5000000;
-            a = (result-xi)*(35f/100f);
-        }
-        System.out.println("Tax is " + tax + "%");
-        if(tax == 0){
-            System.out.println("Your Tax = Free Tax");
-        }
-        else{
-            if(sa == 0){
-                System.out.println("Cal Tax " + result + " - " + xi + " = " + (result-xi) + " * " + tax + "%" + " = " + (int)a);
-                System.out.println("Your Tax" + " = " + (int)a + "BTH");
+        int n = result;
+        int[] taxs = new int[7];
+        int[] nums = new int[7];
+        float sunTax = 0;
+        int i = 0;
+        n-=150000;
+        if(n>0){
+            taxs[i] = 5;
+            if(n-150000 > 0){
+                nums[i] = 150000;
+                sunTax += 150000*(5f/100);
+                n-=150000;
             }
             else{
-                System.out.println("Step 2");
-                System.out.println("Cal Tax " + result + " - " + xi + " = " + (result-xi) + " * " + tax + "%" + " = " + (int)a);
-                System.out.println("Step 1");
-                System.out.println("Cal Tax " + 5 + " * " + tax + "%" + " = " + sa + "Your tax" + " = " + ((int)a+sa));
+                sunTax += n*(5f/100);
+                n-=150000;
             }
+            i++;
         }
+        if(n>0){
+            taxs[i] = 10;
+            if(n-150000 > 0){
+                nums[i] = 150000;
+                sunTax += 150000*(10f/100);
+                n-=150000;
+            }
+            else{
+                sunTax += n*(10f/100);
+                n-=150000;
+            }
+            i++;
+        }
+        if(n>0){
+            taxs[i] = 15;
+            if(n-200000 > 0){
+                nums[i] = 200000;
+                sunTax += 200000*(15f/100);
+                n-=200000;
+            }
+            else{
+                sunTax += n*(15f/100);
+                n-=200000;
+            }
+            i++;
+        }
+        if(n>0){
+            taxs[i] = 20;
+            if(n-250000 > 0){
+                nums[i] = 250000;
+                sunTax += 250000*(20f/100);
+                n-=250000;
+            }
+            else{
+                sunTax += n*(20f/100);
+                n-=250000;
+            }
+            i++;
+        }
+        if(n>0){
+            taxs[i] = 25;
+            if(n-1000000 > 0){ 
+                nums[i] = 1000000;
+                sunTax += 1000000*(25f/100);
+                n-=1000000;
+            }
+            else{
+                sunTax += n*(25f/100);
+                n-=1000000;
+            }
+            i++;
+        }
+        if(n>0){
+            taxs[i] = 30;
+            if(n-3000000 > 0){
+                nums[i] = 3000000;
+                sunTax += 3000000*(30f/100);
+                n-=3000000;
+            }
+            else{
+                sunTax += n*(30f/100);
+                n-=3000000;
+            }
+            i++;
+        }
+        if(n > 0){
+            taxs[i] = 35;
+            if(n-5000000 > 0){
+                nums[i] = 5000000;
+                sunTax += 5000000*(35f/100);
+                n-=5000000;
+            }
+            else{
+                sunTax += n*(35f/100);
+                n-=5000000;
+            }
+            i++;
+        }
+        for(int k = 0;k<i;k++){
+          System.out.print(taxs[k]+" ");
+        }
+        for(int j = 0;j<i-1;j++){
+          System.out.print(nums[j]+" ");
+        }
+        System.out.printf("%d - %d = %d - %d = %d * %d% = %.0f",result , nums[i-2] , result-nums[i-2],nums[i-2],result=nums[i-2]-nums[i-2],taxs[i-1],(result=nums[i-2]-nums[i-1])*taxs[i-1]/100f);
+        for(int l = 1;l<i;l++){
+          
+        }
+        System.out.println(sunTax);
     }
+    
     public static void main(String[] args) {
         int result;
         Scanner sc_salay = new Scanner(System.in);
@@ -88,6 +131,7 @@ public class PersonalIncomeTax{
         int salayYear = salay*12;
         
         if(income == 'Y'){
+            System.out.println("Input other income : ");
             int incomeCost = sc_incost.nextInt();
             result = salayYear-costYear-taxDeuction+incomeCost;
             System.out.println("Income : (" + salay + "x12) - " + costYear + " - " + taxDeuction + " - "  +incomeCost + " = " + result  );      
