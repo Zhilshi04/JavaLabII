@@ -37,23 +37,31 @@ public class PersonalNew {
                         ,"Cal Tax 200000 * 15% = 37500","Cal Tax 250000 * 20% = 50000 "
                         ,"Cal Tax 1000000 * 25% = 250000 ","Cal Tax 3000000 * 30% = 900000 "};
         int[] taxStep = {7500,20000,37500,50000,250000,900000};
-        int round = (rate/5);
-        System.out.println("Step "+round);
-        System.out.print("Cal Tax ");
-        for(int i = 1;i<=(rate/5);i++){
-            // System.out.print(nM + " - " + taxMoney[i-1] + " = ");
-            System.out.printf("%d - %d = ",nM,taxMoney[i-1]);
-            nM-=taxMoney[i-1];
+        System.out.println("Tax is "+rate+"%");
+        if(rate != 0){
+            int round = (rate/5);
+            if(round > 1){
+                System.out.println("Step "+round);
+            }
+            System.out.print("Cal Tax ");
+            for(int i = 1;i<=(rate/5);i++){
+                // System.out.print(nM + " - " + taxMoney[i-1] + " = ");
+                System.out.printf("%d - %d = ",nM,taxMoney[i-1]);
+                nM-=taxMoney[i-1];
+            }
+            sumTax += (nM*(rate/100f));
+            System.out.println(nM + " * " +rate + "%" + " = " + ((int)sumTax));
+            for(int x = (rate/5)-2;x>=0;x--){
+                System.out.println("Step " + --round);
+                sumTax+=(float)taxStep[x];
+                // System.out.printf("Cal Tax %d * %d% = %d",taxMoney[x],(x+1)*5,taxStep[x]);
+                System.out.println(calTax[x]);
+            }
+            System.out.println("Your Tax = " + (int)sumTax + " BTH");
         }
-        sumTax += (nM*(rate/100f));
-        System.out.println(nM + " " +rate + " * %" + " = " + ((int)sumTax));
-        for(int x = (rate/5)-2;x>=0;x--){
-            System.out.println("Step " + --round);
-            sumTax+=(float)taxStep[x];
-            // System.out.printf("Cal Tax %d * %d% = %d",taxMoney[x],(x+1)*5,taxStep[x]);
-            // System.out.println(calTax[x]);
+        else{
+            System.out.println("Your Tax = Free Tax ");
         }
-        System.out.println("Your Tax = " + (int)sumTax + " BTH");
     }
     public static void main(String[] args) {
         int result;
